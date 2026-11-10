@@ -1,12 +1,14 @@
 /**
- * Mondrian Project / Neoplastix — CSS token barrel (D-26.4, D-33).
+ * Mondrian Project / Neoplastix — CSS token barrel (D-26.4, D-33, D-34).
  * Prefer `--nx-*` in new CSS; `--mp-*` remain aliases this term.
  * Apps import only this file: `@import "@mondrian/tokens";` or a relative path.
- * Do not put component rules here. Seat 7 owns this package.
+ * Do not put component rules here. Seat 7 owns this package (U7-T1).
+ * Student contract: docs/style/TOKEN-SYSTEM.md
  */
 
 @import "./color.css";
 @import "./space.css";
 @import "./type.css";
+@import "./form.css";
 @import "./motion.css";
 @import "./elevation.css";

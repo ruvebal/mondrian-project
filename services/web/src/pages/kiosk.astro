@@ -1,0 +1,25 @@
+---
+import ShellLayout from "../layouts/ShellLayout.astro";
+import ScaffoldBanner from "../components/ScaffoldBanner.astro";
+import { withBase } from "../lib/url";
+
+const base = import.meta.env.BASE_URL;
+---
+<ShellLayout title="Kiosk — Neoplastix" current="kiosk">
+  <ScaffoldBanner seat={6} handle="galarp2005" title="M6 / M7 scaffold" />
+  <article class="prose">
+    <h1>Kiosk</h1>
+    <p class="lede">
+      Exhibition / PWA surface. Seat 6 mounts the Svelte+SVG island here; Seat 7
+      owns offline cache, wake lock, and idle reset (M7). Empty on purpose until
+      Wave C.
+    </p>
+    <p class="btn-row">
+      <a class="btn btn--primary" href={withBase("/create/kunsthaus-1930-rbby/", base)}>
+        Open create probe
+      </a>
+      <a class="btn btn--ghost" href={withBase("/assignments/seat-6/", base)}>Seat 6 brief</a>
+      <a class="btn btn--ghost" href={withBase("/assignments/seat-7/", base)}>Seat 7 brief</a>
+    </p>
+  </article>
+</ShellLayout>

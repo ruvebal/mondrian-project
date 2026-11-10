@@ -1,0 +1,116 @@
+---
+import ShellLayout from "../../layouts/ShellLayout.astro";
+import ScaffoldBanner from "../../components/ScaffoldBanner.astro";
+---
+<ShellLayout title="Design tokens — Neoplastix" current="tokens">
+  <ScaffoldBanner seat={7} handle="PauLAanDReEa-Ai" title="U7-T1 specimen scaffold" />
+  <article class="prose">
+    <h1>Token specimen</h1>
+    <p class="lede">
+      Barrel: <code>@mondrian/tokens</code>. Prefer <code>--nx-*</code>. Seat 7
+      owns visual QA and this page’s polish (D-34 / D-35).
+    </p>
+  </article>
+
+  <section class="token-specimen" aria-labelledby="type-roles">
+    <h2 id="type-roles">Type roles</h2>
+    <p class="token-specimen__headline">Headlines — Architype / Styl stack</p>
+    <p class="token-specimen__subhead">Subheads — Futura / Jost stack</p>
+    <p class="token-specimen__body">
+      Body — Neue Haas Grotesk / Inter. Measure neoplastic compositions; liquid-fill
+      the frame; rotate hue as study.
+    </p>
+    <p class="token-specimen__caption">Captions — Univers / Inter · label chrome</p>
+  </section>
+
+  <section class="token-specimen" aria-labelledby="colour-roles">
+    <h2 id="colour-roles">Colour roles</h2>
+    <ul class="token-swatches">
+      <li style="--swatch: var(--nx-role-red)"><span>red</span></li>
+      <li style="--swatch: var(--nx-role-yellow)"><span>yellow</span></li>
+      <li style="--swatch: var(--nx-role-blue)"><span>blue</span></li>
+      <li style="--swatch: var(--nx-role-black)"><span>black</span></li>
+      <li style="--swatch: var(--nx-role-white)"><span>white</span></li>
+      <li style="--swatch: var(--nx-color-canvas)"><span>canvas</span></li>
+      <li style="--swatch: var(--nx-color-ink)"><span>ink</span></li>
+    </ul>
+    <p class="token-specimen__note">
+      Form: <code>--nx-radius-chrome: 0</code> — rectangular planes only.
+    </p>
+  </section>
+</ShellLayout>
+
+<style>
+  .token-specimen {
+    margin: var(--nx-space-6) 0;
+    max-width: 42rem;
+  }
+
+  .token-specimen h2 {
+    font-family: var(--nx-font-subhead);
+    font-size: var(--nx-text-lg);
+    margin: 0 0 var(--nx-space-3);
+  }
+
+  .token-specimen__headline {
+    font-family: var(--nx-font-headline);
+    font-size: var(--nx-text-2xl);
+    letter-spacing: var(--nx-tracking-display);
+    line-height: var(--nx-leading-tight);
+    margin: 0 0 var(--nx-space-3);
+  }
+
+  .token-specimen__subhead {
+    font-family: var(--nx-font-subhead);
+    font-size: var(--nx-text-xl);
+    margin: 0 0 var(--nx-space-3);
+  }
+
+  .token-specimen__body {
+    font-family: var(--nx-font-body);
+    font-size: var(--nx-text-md);
+    line-height: var(--nx-leading-normal);
+    margin: 0 0 var(--nx-space-3);
+  }
+
+  .token-specimen__caption {
+    font-family: var(--nx-font-caption);
+    font-size: var(--nx-text-sm);
+    color: var(--nx-color-muted);
+    margin: 0;
+  }
+
+  .token-specimen__note {
+    font-family: var(--nx-font-caption);
+    font-size: var(--nx-text-sm);
+    color: var(--nx-color-muted);
+    margin: var(--nx-space-4) 0 0;
+  }
+
+  .token-swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+    gap: var(--nx-space-3);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .token-swatches li {
+    aspect-ratio: 1;
+    background: var(--swatch);
+    border: 1px solid color-mix(in srgb, var(--nx-color-ink) 18%, transparent);
+    border-radius: var(--nx-radius-chrome);
+    display: grid;
+    place-items: end start;
+    padding: 0.35rem;
+  }
+
+  .token-swatches span {
+    font-family: var(--nx-font-caption);
+    font-size: var(--nx-text-xs);
+    background: color-mix(in srgb, var(--nx-color-canvas) 88%, transparent);
+    color: var(--nx-color-ink);
+    padding: 0.1rem 0.25rem;
+  }
+</style>

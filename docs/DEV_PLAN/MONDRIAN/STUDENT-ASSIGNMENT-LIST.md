@@ -44,7 +44,7 @@ Instructor opens [`PHASE-M3.md`](PHASE-M3.md). **No Svelte island** on these rou
 | **3** About | `medinaxd29` | S3-T1, S3-T2, S3-T3, S3-T5 | Seven About scenes; GSAP parallax on `/about/` only; reduced-motion / no-JS complete; safe cites |
 | **4** Gallery / method | `Yassin-Skirej` | S4-T1, S4-T2, S4-T3 | Live CSS Grid gallery; `/method/` (no JS); container-query chrome |
 | **5** About-us / contribute | `itzy-4Qunn7` | S5-T1, S5-T4 | `/about-us/` credits + research/AI notice; `/contribute/` lanes |
-| **7** Tokens (slice) | `PauLAanDReEa-Ai` | U7-T1, U7-T6 | Token barrel for shell; visual QA on chrome PRs |
+| **7** Tokens (slice) | `PauLAanDReEa-Ai` | U7-T1, U7-T6 | Token barrel + type specimen preview ([`TOKEN-SYSTEM.md`](../../style/TOKEN-SYSTEM.md), D-34); visual QA on chrome PRs |
 
 Shared M3 gates: Playwright fit + θ fallbacks; axe clean; base-aware URLs; no painting photos.
 

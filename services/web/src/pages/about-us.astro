@@ -1,19 +1,13 @@
 ---
 import ShellLayout from "../layouts/ShellLayout.astro";
+import ScaffoldBanner from "../components/ScaffoldBanner.astro";
+import { seats } from "../data/seats";
 import { withBase } from "../lib/url";
 
 const base = import.meta.env.BASE_URL;
-const seats = [
-  { seat: 1, handle: "ATIaas", lane: "Analyzer" },
-  { seat: 2, handle: "diegomartinezh", lane: "API + contract" },
-  { seat: 3, handle: "medinaxd29", lane: "About story" },
-  { seat: 4, handle: "Yassin-Skirej", lane: "Gallery & method" },
-  { seat: 5, handle: "itzy-4Qunn7", lane: "About-us / contribute" },
-  { seat: 6, handle: "galarp2005", lane: "Editor" },
-  { seat: 7, handle: "PauLAanDReEa-Ai", lane: "Export / PWA / tokens" },
-];
 ---
 <ShellLayout title="About us — Neoplastix" current="about-us">
+  <ScaffoldBanner seat={5} handle="itzy-4Qunn7" title="Wave A scaffold" />
   <article class="prose">
     <h1>About us</h1>
     <p class="lede">
@@ -30,18 +24,20 @@ const seats = [
     </p>
 
     <h2>Cohort seats</h2>
-    <ol>
+    <ol class="rule-list">
       {
         seats.map((s) => (
           <li>
-            <strong>Seat {s.seat}</strong> — {s.lane} (
-            <a href={`https://github.com/${s.handle}`}>{s.handle}</a>)
+            <strong>Seat {s.id}</strong> — {s.title} (
+            <a href={`https://github.com/${s.handle}`}>{s.handle}</a>) ·
+            <a href={withBase(`/assignments/seat-${s.id}/`, base)}>brief</a>
           </li>
         ))
       }
     </ol>
     <p>
       Path ownership and task IDs:
+      <a href={withBase("/assignments/", base)}>Assignments</a> ·
       <a href={withBase("/contribute/", base)}>How to contribute</a>.
     </p>
 

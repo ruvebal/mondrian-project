@@ -1,4 +1,8 @@
 :root {
+  /* Prefer hairline armature over soft shadow (D-34 form language) */
   --mp-border-thin: 1px solid color-mix(in srgb, var(--mp-color-ink) 18%, transparent);
   --mp-shadow-chrome: 0 1px 0 color-mix(in srgb, var(--mp-color-ink) 8%, transparent);
+
+  --nx-border-thin: var(--mp-border-thin);
+  --nx-shadow-chrome: var(--mp-shadow-chrome);
 }

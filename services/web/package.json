@@ -17,8 +17,10 @@
   "dependencies": {
     "@astrojs/svelte": "^9.1.1",
     "@mondrian/editor": "workspace:*",
+    "@mondrian/mark-canvas": "workspace:*",
     "@mondrian/matrix": "workspace:*",
     "@mondrian/tokens": "workspace:*",
+
     "astro": "^7.4.2",
     "gsap": "3.13.0",
     "svelte": "^5.57.3",

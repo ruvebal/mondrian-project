@@ -1,0 +1,65 @@
+---
+import ShellLayout from "../../layouts/ShellLayout.astro";
+import ScaffoldBanner from "../../components/ScaffoldBanner.astro";
+import { seatById, seats } from "../../data/seats";
+import { withBase } from "../../lib/url";
+
+export function getStaticPaths() {
+  return seats.map((seat) => ({ params: { id: String(seat.id) } }));
+}
+
+const id = Number(Astro.params.id);
+const seat = seatById(id);
+if (!seat) {
+  throw new Error(`Unknown seat ${Astro.params.id}`);
+}
+
+const base = import.meta.env.BASE_URL;
+---
+<ShellLayout title={`Seat ${seat.id} — ${seat.title}`} current="assignments">
+  <ScaffoldBanner seat={seat.id} handle={seat.handle} title="Seat scaffold" />
+  <article class="prose">
+    <p class="seat-card__meta">Wave {seat.wave} · {seat.track}</p>
+    <h1>Seat {seat.id}: {seat.title}</h1>
+    <p class="lede">
+      Handle <code>{seat.handle}</code>. Outcome: {seat.outcome}
+    </p>
+
+    <h2>Owns</h2>
+    <ul class="rule-list">
+      {seat.owns.map((item) => <li><code>{item}</code></li>)}
+    </ul>
+
+    <h2>Primary tasks</h2>
+    <ul class="rule-list">
+      {
+        seat.tasks.map((task) => (
+          <li>
+            <strong>{task.id}</strong> — {task.summary}
+          </li>
+        ))
+      }
+    </ul>
+
+    <h2>Integrate here</h2>
+    <p>
+      These routes are live scaffolds. Replace stubs with your deliverable; keep
+      chrome on <code>--nx-*</code> tokens.
+    </p>
+    <ul class="rule-list">
+      {
+        seat.routes.map((route) => (
+          <li>
+            <a href={withBase(route.href, base)}>{route.label}</a>
+            <code> {route.href}</code>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="btn-row">
+      <a class="btn btn--primary" href={withBase("/assignments/", base)}>All seats</a>
+      <a class="btn btn--ghost" href={withBase("/contribute/", base)}>Contribute rules</a>
+    </p>
+  </article>
+</ShellLayout>

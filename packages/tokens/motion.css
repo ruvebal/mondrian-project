@@ -2,6 +2,10 @@
   --mp-ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --mp-duration-fast: 120ms;
   --mp-duration-normal: 240ms;
+
+  --nx-ease-standard: var(--mp-ease-standard);
+  --nx-duration-fast: var(--mp-duration-fast);
+  --nx-duration-normal: var(--mp-duration-normal);
 }
 
 @media (prefers-reduced-motion: reduce) {

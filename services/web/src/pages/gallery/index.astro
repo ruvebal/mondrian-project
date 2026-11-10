@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import ShellLayout from "../../layouts/ShellLayout.astro";
+import ScaffoldBanner from "../../components/ScaffoldBanner.astro";
 import Frame from "../../components/Frame.astro";
 import { withBase } from "../../lib/url";
 import type { WorkDoc } from "../../lib/work-plan";
@@ -9,6 +10,7 @@ const base = import.meta.env.BASE_URL;
 const works = await getCollection("works");
 ---
 <ShellLayout title="Gallery — Neoplastix" current="gallery">
+  <ScaffoldBanner seat={4} handle="Yassin-Skirej" title="Wave A scaffold" />
   <article class="prose">
     <h1>Gallery</h1>
     <p class="lede">

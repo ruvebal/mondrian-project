@@ -151,7 +151,7 @@ LAN service · M7 “no Pages→API” gate · Phase-2 generate (post-MVP).
 
 | ID | Spec | Phase |
 | --- | --- | --- |
-| U7-T1 | Own `packages/tokens/` barrel; no raw colours outside token files; shell + editor consume the barrel. | M1/M3 |
+| U7-T1 | Own `packages/tokens/` barrel (D-26.4 + **D-34**); type roles Van Doesburg / Futura / Neue Haas / Univers; form `radius: 0`; no raw colours outside token files; shell + editor consume `--nx-*`; student type-specimen preview per [`TOKEN-SYSTEM.md`](../../style/TOKEN-SYSTEM.md). | M1/M3 |
 | U7-T2 | Client export: SVG, **standalone HTML** (full-size SVG embedded), CSV, PNG-from-SVG. | M6 |
 | U7-T3 | QR = **recipe URL** only (D-26/D-27); never SVG or work JSON in query; keep MVP recipe query ≈150 chars. | M6/M7 |
 | U7-T4 | Paper presets (**sticker-50 default**); stage = silhouette; **Print** giveaway; `@page` per preset; calibrate 50 mm + 100 mm. | M6 |

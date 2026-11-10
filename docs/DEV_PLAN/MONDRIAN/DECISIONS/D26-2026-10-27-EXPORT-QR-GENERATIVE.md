@@ -125,6 +125,7 @@ packages/tokens/
   color.css
   space.css
   type.css
+  form.css           ← D-34 orthogonal chrome (radius 0)
   motion.css
   elevation.css
 ```
@@ -135,8 +136,9 @@ Rules:
 - Editor island and Astro layouts both import `@mondrian/tokens` (or the
   relative barrel until the package is wired in M1).
 - Design seat owns the barrel; other lanes consume, do not fork palettes.
-- Scaffold copy lives in [`../scaffold/tokens/`](../scaffold/tokens/) until M1
-  moves it into the product monorepo.
+- Scaffold copy lived in forge `scaffold/tokens/` until M1; product path is
+  `packages/tokens/` (this repo). Typography / form locks: **D-34** +
+  [`../../../style/TOKEN-SYSTEM.md`](../../../style/TOKEN-SYSTEM.md).
 
 ---
 

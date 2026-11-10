@@ -1,0 +1,20 @@
+---
+import { withBase } from "../lib/url";
+
+const base = import.meta.env.BASE_URL;
+const svg = withBase("/favicon.svg", base);
+const ico = withBase("/favicon.ico", base);
+const apple = withBase("/icons/apple-touch-icon.png", base);
+const png32 = withBase("/icons/favicon-32.png", base);
+const png16 = withBase("/icons/favicon-16.png", base);
+const manifest = withBase("/site.webmanifest", base);
+---
+<link rel="icon" type="image/svg+xml" href={svg} />
+<link rel="icon" type="image/png" sizes="32x32" href={png32} />
+<link rel="icon" type="image/png" sizes="16x16" href={png16} />
+<link rel="shortcut icon" href={ico} />
+<link rel="apple-touch-icon" sizes="180x180" href={apple} />
+<link rel="manifest" href={manifest} />
+{/* Literal hex mirrors --nx-color-theme in packages/tokens/color.css (meta cannot use CSS vars). */}
+<meta name="theme-color" content="#121212" />
+

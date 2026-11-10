@@ -1,0 +1,19 @@
+{
+  "name": "@mondrian/mark-canvas",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./math.js": "./src/math.js",
+    "./palette.js": "./src/palette.js",
+    "./favicon-canvas.js": "./src/favicon-canvas.js",
+    "./hero-field.js": "./src/hero-field.js",
+    "./hero-coordinator.js": "./src/hero-coordinator.js"
+  },
+  "scripts": {
+    "build": "node -e \"console.log('mark-canvas: esm only')\"",
+    "test": "node --test src/*.test.js",
+    "lint": "node -e \"console.log('mark-canvas: lint deferred')\""
+  }
+}

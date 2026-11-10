@@ -1,0 +1,17 @@
+/**
+ * Form language — orthogonal Neoplastic chrome (D-34).
+ * Rectangular planes / rapports; no curves; no chrome diagonals.
+ * Grounding: FLAG-QUOTE-1920 expansion · FIRST-SOURCES §6.3 (plans rectangulaires).
+ */
+:root {
+  --mp-radius-none: 0;
+  --mp-radius-chrome: 0;
+  --mp-stroke-armature: 1px;
+  /* Optional echo of van Doesburg 5×5 modular alphabet — spacing still 4-based in space.css */
+  --mp-grid-module: 0.25rem;
+
+  --nx-radius-none: var(--mp-radius-none);
+  --nx-radius-chrome: var(--mp-radius-chrome);
+  --nx-stroke-armature: var(--mp-stroke-armature);
+  --nx-grid-module: var(--mp-grid-module);
+}

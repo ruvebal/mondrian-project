@@ -1,9 +1,20 @@
 ---
 import ShellLayout from "../layouts/ShellLayout.astro";
+import ScaffoldBanner from "../components/ScaffoldBanner.astro";
 import { Content } from "../../../../CONTRIBUTING.md";
+import { withBase } from "../lib/url";
+
+const base = import.meta.env.BASE_URL;
 ---
 <ShellLayout title="Contribute — Neoplastix" current="contribute">
+  <ScaffoldBanner seat={5} handle="itzy-4Qunn7" title="Wave A scaffold" />
   <article class="prose">
+    <p class="lede">
+      Seat briefs:
+      <a href={withBase("/assignments/", base)}>/assignments/</a>
+      · Token specimen:
+      <a href={withBase("/design/tokens/", base)}>/design/tokens/</a>
+    </p>
     <Content />
   </article>
 </ShellLayout>

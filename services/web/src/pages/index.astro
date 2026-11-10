@@ -1,19 +1,30 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { withBase } from "../lib/url";
+import "../styles/landing-hero.css";
 
 const base = import.meta.env.BASE_URL;
 const contribute = withBase("/contribute/", base);
 const about = withBase("/about/", base);
 const gallery = withBase("/gallery/", base);
+const assignments = withBase("/assignments/", base);
+const method = withBase("/method/", base);
+const tokens = withBase("/design/tokens/", base);
 const heroBg = withBase("/brand/hero-bg.svg", base);
 const wordmark = withBase("/brand/wordmark.svg", base);
 const mark = withBase("/brand/mark.svg", base);
 const repoHref = "https://github.com/ruvebal/mondrian-project";
 const liveHref = "https://ruvebal.github.io/mondrian-project/";
 ---
-<BaseLayout title="Neoplastix" bare>
-  <section class="landing" style={`--hero-bg: url('${heroBg}')`}>
+<BaseLayout title="Neoplastix — Mondrian Project" bare>
+  <section
+    class="landing"
+    data-landing-hero
+    data-hero-src={heroBg}
+    style={`--hero-bg: url('${heroBg}')`}
+  >
+    <canvas class="landing__field" data-landing-field aria-hidden="true"></canvas>
+
     <header class="landing__chrome">
       <a class="landing__home" href={withBase("/", base)} aria-label="Neoplastix home">
         <img class="landing__mark" src={mark} width="40" height="40" alt="" />
@@ -37,6 +48,14 @@ const liveHref = "https://ruvebal.github.io/mondrian-project/";
 
     <div class="landing__stage">
       <div class="landing__copy">
+        <div
+          class="favicon-canvas-25d"
+          data-favicon-src={mark}
+          role="img"
+          aria-label="Neoplastix mark — decorative neoplastic grid"
+        >
+          <img src={mark} width="176" height="176" alt="" />
+        </div>
         <img
           class="landing__wordmark"
           src={wordmark}
@@ -58,12 +77,14 @@ const liveHref = "https://ruvebal.github.io/mondrian-project/";
           </footer>
         </blockquote>
         <p class="landing__lede">
-          Measure neoplastic compositions, liquid-fill a free-aspect frame, and
-          take a personal version — URL, print, or file.
+          FE I integrator: measure neoplastic compositions, liquid-fill a free-aspect
+          frame, rotate hue as study — then export a personal version. Seven seats fill
+          this scaffold; the art and routes are browsable today.
         </p>
         <p class="landing__cta">
-          <a class="btn btn--primary" href={gallery}>Open the gallery</a>
-          <a class="btn btn--ghost" href={about}>Know more</a>
+          <a class="btn btn--primary" href={assignments}>Student assignments</a>
+          <a class="btn btn--ghost" href={gallery}>Gallery</a>
+          <a class="btn btn--ghost" href={about}>About</a>
           <a class="btn btn--ghost" href={contribute}>Contribute</a>
         </p>
         <p class="landing__live">
@@ -72,201 +93,40 @@ const liveHref = "https://ruvebal.github.io/mondrian-project/";
         </p>
       </div>
     </div>
+
+    <div class="landing__footer-band">
+      <div class="landing__footer-inner">
+        <div>
+          <h2>What this is</h2>
+          <p>
+            Neoplastix is the visitor product. Mondrian Project is the FE I cohort
+            programme. Studies are attributed “after Mondrian” — measured SVG/Grid,
+            never museum photos.
+          </p>
+        </div>
+        <div>
+          <h2>Browse the scaffold</h2>
+          <ul>
+            <li><a href={assignments}>Assignments by seat</a></li>
+            <li><a href={method}>Method spine</a></li>
+            <li><a href={tokens}>Design tokens specimen</a></li>
+            <li><a href={contribute}>Contribute / lanes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Hard rules</h2>
+          <ul>
+            <li>No FastAPI from Pages</li>
+            <li>No Svelte outside create/kiosk</li>
+            <li>Tokens only — no raw hex in pages</li>
+            <li>One measured work each (M8)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </section>
 </BaseLayout>
 
-<style>
-  .landing {
-    min-height: 100dvh;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    background-color: #0f172a;
-    background-image: var(--hero-bg);
-    background-size: cover;
-    background-position: center right;
-    color: #f8fafc;
-  }
-
-  .landing__chrome {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.25rem;
-    max-width: 72rem;
-    width: 100%;
-    margin-inline: auto;
-    box-sizing: border-box;
-  }
-
-  .landing__home {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
-    text-decoration: none;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-  }
-
-  .landing__mark {
-    display: block;
-    width: 2.25rem;
-    height: 2.25rem;
-    border: 1px solid color-mix(in srgb, #f8fafc 25%, transparent);
-  }
-
-  .landing__repo {
-    display: inline-flex;
-    color: #f8fafc;
-    opacity: 0.9;
-    transition: opacity 160ms ease, transform 160ms ease;
-  }
-
-  .landing__repo:hover,
-  .landing__repo:focus-visible {
-    opacity: 1;
-    transform: translateY(-1px);
-  }
-
-  .landing__stage {
-    display: flex;
-    align-items: center;
-    padding: 1.5rem 1.25rem 3rem;
-    max-width: 72rem;
-    width: 100%;
-    margin-inline: auto;
-    box-sizing: border-box;
-  }
-
-  .landing__copy {
-    max-width: min(34rem, 92vw);
-  }
-
-  .landing__wordmark {
-    display: block;
-    width: min(22rem, 88vw);
-    height: auto;
-    margin-bottom: 0.75rem;
-  }
-
-  .landing__title {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .landing__flag {
-    margin: 1.25rem 0 1rem;
-    padding: 0;
-    border: 0;
-    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
-    line-height: 1.45;
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  .landing__flag p {
-    margin: 0 0 0.75rem;
-  }
-
-  .landing__flag footer {
-    margin: 0;
-    padding: 0;
-    max-width: none;
-    font-size: 0.8rem;
-    font-style: normal;
-    opacity: 0.75;
-    line-height: 1.4;
-  }
-
-  .landing__flag cite {
-    font-style: normal;
-  }
-
-  .landing__lede {
-    margin: 0 0 1.5rem;
-    font-size: 1.05rem;
-    line-height: 1.5;
-    opacity: 0.92;
-    max-width: 28rem;
-  }
-
-  .landing__cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin: 0 0 1rem;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 2.75rem;
-    padding: 0.55rem 1.1rem;
-    text-decoration: none;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    border: 1px solid #f8fafc;
-    transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
-  }
-
-  .btn--primary {
-    background: #f8fafc;
-    color: #0f172a;
-  }
-
-  .btn--ghost {
-    background: transparent;
-    color: #f8fafc;
-  }
-
-  .btn:hover,
-  .btn:focus-visible {
-    transform: translateY(-1px);
-  }
-
-  .btn--primary:hover,
-  .btn--primary:focus-visible {
-    background: #e2e8f0;
-  }
-
-  .btn--ghost:hover,
-  .btn--ghost:focus-visible {
-    background: color-mix(in srgb, #f8fafc 12%, transparent);
-  }
-
-  .landing__live {
-    margin: 0;
-    font-size: 0.85rem;
-    opacity: 0.7;
-  }
-
-  .landing__live a {
-    text-underline-offset: 0.15em;
-  }
-
-  @media (max-width: 720px) {
-    .landing {
-      background-position: 70% center;
-    }
-
-    .landing__copy {
-      background: color-mix(in srgb, #0f172a 72%, transparent);
-      padding: 1rem;
-      margin-inline: -0.25rem;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .landing__repo,
-    .btn {
-      transition: none;
-    }
-  }
-</style>
+<script>
+  import "../scripts/landing-hero.js";
+</script>

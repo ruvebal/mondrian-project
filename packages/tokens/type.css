@@ -1,18 +1,38 @@
+/**
+ * Type roles — D-34 · research: docs/style/De_Stijl_Typography_Report.md
+ * Target: Architype Van Doesburg / Futura / Neue Haas Grotesk / Univers
+ * Classroom OFL stacks first (docs/style/OPEN-TYPE-ALTERNATIVES.md) until licensed files ship.
+ */
 :root {
-  --mp-font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --mp-font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --mp-font-display: "IBM Plex Sans", system-ui, sans-serif;
+  --mp-font-headline: "Styl", "Architype Van Doesburg", "Jost", "Century Gothic", system-ui,
+    sans-serif;
+  --mp-font-subhead: "Jost", "Futura", "League Spartan", "Century Gothic", system-ui, sans-serif;
+  --mp-font-body: "Inter", "Neue Haas Grotesk Text", "IBM Plex Sans", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  --mp-font-caption: "Inter", "Public Sans", "Univers", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  --mp-font-mono: ui-monospace, "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+
+  /* Legacy aliases consumed by shell layouts */
+  --mp-font-sans: var(--mp-font-body);
+  --mp-font-display: var(--mp-font-headline);
 
   --mp-text-xs: 0.75rem;
   --mp-text-sm: 0.875rem;
   --mp-text-md: 1rem;
   --mp-text-lg: 1.25rem;
   --mp-text-xl: 1.75rem;
+  --mp-text-2xl: 2.25rem;
 
   --mp-leading-tight: 1.2;
   --mp-leading-normal: 1.5;
+  --mp-tracking-display: 0.02em;
 
-  /* D-33 Neoplastix aliases */
+  /* D-33 / D-34 Neoplastix aliases */
+  --nx-font-headline: var(--mp-font-headline);
+  --nx-font-subhead: var(--mp-font-subhead);
+  --nx-font-body: var(--mp-font-body);
+  --nx-font-caption: var(--mp-font-caption);
   --nx-font-sans: var(--mp-font-sans);
   --nx-font-mono: var(--mp-font-mono);
   --nx-font-display: var(--mp-font-display);
@@ -21,6 +41,8 @@
   --nx-text-md: var(--mp-text-md);
   --nx-text-lg: var(--mp-text-lg);
   --nx-text-xl: var(--mp-text-xl);
+  --nx-text-2xl: var(--mp-text-2xl);
   --nx-leading-tight: var(--mp-leading-tight);
   --nx-leading-normal: var(--mp-leading-normal);
+  --nx-tracking-display: var(--mp-tracking-display);
 }

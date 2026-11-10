@@ -78,10 +78,16 @@ Each row is an ADR in one line. M0 recorded each as `ratified` or `rejected` wit
 
 | **D-32 SVG study ≠ photo** | Public artefact = measured SVG / Grid **study after** the work; never museum photos. Improves photo-rights posture; composition rights still per-work (EU PD Mondrian MVP; siblings may stay pending). | Pitch §13 + owner clarification 27 Oct. | US or estate claim on a specific study → pull that slug from Pages until cleared. |
 | **D-33 Neoplastix marque** | Visitor product = **Neoplastix** (canonical `https://neoplastix.crea-comm.net`; live = github.io until cutover). Programme/repo remain **Mondrian Project** / `ruvebal/mondrian-project` this AY. Athanor slug `mondrian-project` unchanged. Vanity `.io`/`.art` deferred. | Owner §9 locks 9 Nov 2026; D4 amended same day. | DNS/host cutover or `@neoplastix` scope wait on human / Wave A. |
+| **D-34 Style tokens** | Barrel `packages/tokens/` (+ `form.css`); type roles Architype Van Doesburg / Futura / Neue Haas Grotesk / Univers; chrome `--nx-radius-chrome: 0`; painting fills stay D-07. Seat 7 owns preview. | Typography report + 1920 imprint grounding (FIRST-SOURCES §6.3–6.4). | Foundry license before claiming Architype webfont live. |
+| **D-35 Favicon + Canvas 2.5D** | Canonical `brand/mark.svg`; deterministic favicon family; `@mondrian/mark-canvas` (parse SVG rects); landing field + foveal mark; `setCameraPaused` coordination. | canvas-25d-content-hero skill · token palette. | Tune amplitudes only; do not redraw mark geometry. |
 
 **Decision status (27 Oct 2026 — owner amend):** D-32 **`adopted`**. Evidence: [`DECISIONS/D32-2026-10-27-SVG-STUDY-NOT-PHOTO.md`](DECISIONS/D32-2026-10-27-SVG-STUDY-NOT-PHOTO.md). Product repo already exists (`ruvebal/mondrian-project`); keep cascade docs in sync there.
 
 **Decision status (9 Nov 2026 — owner):** D-33 **`adopted`**. Evidence: [`DECISIONS/D33-2026-11-09-NEOPLASTIX-MARQUE.md`](DECISIONS/D33-2026-11-09-NEOPLASTIX-MARQUE.md).
+
+**Decision status (10 Nov 2026 — owner):** D-34 **`adopted`**. Evidence: [`DECISIONS/D34-2026-11-10-STYLE-TOKEN-TYPOGRAPHY.md`](DECISIONS/D34-2026-11-10-STYLE-TOKEN-TYPOGRAPHY.md) · [`../../style/TOKEN-SYSTEM.md`](../../style/TOKEN-SYSTEM.md).
+
+**Decision status (10 Nov 2026 — owner):** D-35 **`adopted`**. Evidence: [`DECISIONS/D35-2026-11-10-FAVICON-CANVAS-25D.md`](DECISIONS/D35-2026-11-10-FAVICON-CANVAS-25D.md).
 
 ---
 

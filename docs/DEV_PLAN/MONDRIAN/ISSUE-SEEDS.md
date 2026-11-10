@@ -14,7 +14,8 @@ Branch naming reminder: `lane/<handle>-issue-<n>-<slug>`
 | `[shell] About scenes prose + parallax QA` | 3 | S3-T1, S3-T2, S3-T3, S3-T5 |
 | `[shell] Gallery CSS Grid pedagogy + method page depth` | 4 | S4-T1, S4-T2, S4-T3 |
 | `[shell] About-us credits + contribute sync` | 5 | S5-T1, S5-T4 |
-| `[design] Token barrel consumption + visual QA checklist` | 7 | U7-T1, U7-T6 |
+| `[design] Token barrel consumption + visual QA checklist` | 7 | U7-T1, U7-T6 · D-34 |
+| `[design] Type specimen / tokens preview page` | 7 | U7-T1 · [`TOKEN-SYSTEM.md`](../../style/TOKEN-SYSTEM.md) |
 | `[brand] Neoplastix wordmark / --nx token QA` | 7 ∩ instructor | D-33 |
 | `[ci] Playwright fit + axe on gallery/about` | 4 ∩ 2 | M3 Acceptance |
 

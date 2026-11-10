@@ -1,0 +1,59 @@
+---
+import ShellLayout from "../../layouts/ShellLayout.astro";
+import ScaffoldBanner from "../../components/ScaffoldBanner.astro";
+import { neverRules, seats, sharedRules } from "../../data/seats";
+import { withBase } from "../../lib/url";
+
+const base = import.meta.env.BASE_URL;
+---
+<ShellLayout title="Assignments — Neoplastix" current="assignments">
+  <article class="prose">
+    <ScaffoldBanner title="Cohort handout (web)" />
+    <h1>Student assignments</h1>
+    <p class="lede">
+      Cohort of 7 · product marque <strong>Neoplastix</strong> · programme
+      <strong>Mondrian Project</strong>. Full acceptance lines live in the repo under
+      <code>docs/DEV_PLAN/MONDRIAN/TEAM-ASSIGNMENTS.md</code>. This page is the
+      browsable map — seat pages are scaffolds for your Wave A–C work.
+    </p>
+
+    <h2>Everyone</h2>
+    <ol class="rule-list">
+      {sharedRules.map((rule) => <li>{rule}</li>)}
+    </ol>
+
+    <h2>Never</h2>
+    <ul class="rule-list">
+      {neverRules.map((rule) => <li>{rule}</li>)}
+    </ul>
+
+    <h2>Seats</h2>
+  </article>
+
+  <ul class="seat-grid">
+    {
+      seats.map((seat) => (
+        <li>
+          <a class="seat-card" href={withBase(`/assignments/seat-${seat.id}/`, base)}>
+            <p class="seat-card__meta">
+              Seat {seat.id} · Wave {seat.wave} · {seat.track}
+            </p>
+            <h2>{seat.title}</h2>
+            <p>
+              <code>{seat.handle}</code> — {seat.outcome}
+            </p>
+            <span class="wave-pill">Open seat brief</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <article class="prose">
+    <p class="btn-row">
+      <a class="btn btn--primary" href={withBase("/gallery/", base)}>Gallery</a>
+      <a class="btn btn--ghost" href={withBase("/contribute/", base)}>Contribute</a>
+      <a class="btn btn--ghost" href={withBase("/design/tokens/", base)}>Tokens</a>
+    </p>
+  </article>
+</ShellLayout>

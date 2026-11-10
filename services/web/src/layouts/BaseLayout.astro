@@ -1,5 +1,6 @@
 ---
 import "@mondrian/tokens";
+import FaviconLinks from "../components/FaviconLinks.astro";
 import { withBase } from "../lib/url";
 
 interface Props {
@@ -11,7 +12,6 @@ interface Props {
 const { title, noindex = false, bare = false } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const homeHref = withBase("/", base);
-const faviconHref = withBase("/favicon.svg", base);
 const repoHref = "https://github.com/ruvebal/mondrian-project";
 ---
 <!doctype html>
@@ -21,11 +21,12 @@ const repoHref = "https://github.com/ruvebal/mondrian-project";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {noindex && <meta name="robots" content="noindex" />}
     <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href={faviconHref} />
+    <FaviconLinks />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=Jost:ital,wght@0,400;0,500;0,600;1,400&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -67,13 +68,13 @@ const repoHref = "https://github.com/ruvebal/mondrian-project";
 <style is:global>
   body {
     margin: 0;
-    font-family: var(--mp-font-sans, "IBM Plex Sans", system-ui, sans-serif);
-    background: var(--mp-color-canvas, #f4f2ed);
-    color: var(--mp-color-ink, #121212);
+    font-family: var(--nx-font-body);
+    background: var(--nx-color-canvas);
+    color: var(--nx-color-ink);
   }
   body.bare {
-    background: #0f172a;
-    color: #f8fafc;
+    background: var(--nx-color-ink);
+    color: var(--nx-role-white);
   }
   .site-header {
     display: flex;
@@ -88,6 +89,7 @@ const repoHref = "https://github.com/ruvebal/mondrian-project";
     font-weight: 600;
     letter-spacing: 0.02em;
     text-decoration: none;
+    font-family: var(--nx-font-subhead);
   }
   .site-header .repo {
     display: inline-flex;
@@ -105,8 +107,9 @@ const repoHref = "https://github.com/ruvebal/mondrian-project";
     margin-inline: auto;
   }
   footer {
-    color: var(--mp-color-muted, #5c5c5c);
-    font-size: var(--mp-text-sm, 0.875rem);
+    color: var(--nx-color-muted);
+    font-size: var(--nx-text-sm);
+    font-family: var(--nx-font-caption);
   }
   a {
     color: inherit;

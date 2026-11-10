@@ -1,0 +1,293 @@
+import {
+  clamp,
+  fovealResponse,
+  projectFacet,
+  springAtRest,
+  springStep,
+} from "./math.js";
+import { staggeredColour, transitionDuration } from "./palette.js";
+import { loadSvgFacets } from "./svg-facets.js";
+
+/**
+ * SVG-derived decorative mark. Defaults match canvas-25d foveal baselines.
+ * planeTravelX/Y are fractions of host width/height (0.042 / 0.032).
+ */
+export async function mountFaviconCanvas(host, options = {}) {
+  if (!host || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return null;
+  const fallback = host.querySelector("img");
+  const source = host.dataset.faviconSrc || fallback?.currentSrc || fallback?.src;
+  if (!source) return null;
+
+  const canvas = document.createElement("canvas");
+  canvas.className = "favicon-canvas-25d__surface";
+  canvas.setAttribute("aria-hidden", "true");
+  const context = canvas.getContext("2d", { alpha: true, desynchronized: true });
+  if (!context) return null;
+
+  let facets;
+  let viewBox;
+  let palette;
+  try {
+    ({ facets, viewBox, palette } = await loadSvgFacets(source));
+  } catch (error) {
+    console.warn("[mark-canvas] Static SVG fallback retained.", error);
+    return null;
+  }
+  if (!facets.length) return null;
+  host.prepend(canvas);
+
+  let width = 1;
+  let height = 1;
+  let dpr = 1;
+  let frame = 0;
+  let destroyed = false;
+  let visible = true;
+  let previous = performance.now();
+  let elapsed = 0;
+  let drawOrder = [];
+  const target = { yaw: 0, pitch: 0, depth: 0, planeX: 0, planeY: 0 };
+  const camera = {
+    yaw: { value: 0, velocity: 0 },
+    pitch: { value: 0, velocity: 0 },
+    depth: { value: 0, velocity: 0 },
+    planeX: { value: 0, velocity: 0 },
+    planeY: { value: 0, velocity: 0 },
+  };
+  const paletteTransition = { from: 0, to: 0, elapsed: 2 };
+  const paletteDelay = options.paletteDelay ?? 0.045;
+  const paletteDuration = options.paletteDuration ?? 0.36;
+  const paletteTotal = transitionDuration(facets.length, paletteDelay, paletteDuration);
+  let paletteChanging = false;
+
+  function draw() {
+    context.setTransform(dpr, 0, 0, dpr, 0, 0);
+    context.clearRect(0, 0, width, height);
+    const fit = Math.min(width / viewBox.width, height / viewBox.height) * (options.fitScale ?? 0.9);
+    const items = facets.map((facet) => ({
+      facet,
+      projected: projectFacet(facet, viewBox, camera, elapsed, options),
+    }));
+    if (camera.depth.value > 0.08) {
+      items.sort((a, b) => b.projected.z - a.projected.z || a.facet.index - b.facet.index);
+    }
+    drawOrder = items;
+
+    for (const { facet, projected } of items) {
+      const matrix = new DOMMatrix()
+        .translate(
+          width / 2 + camera.planeX.value + projected.x * fit,
+          height / 2 + camera.planeY.value + projected.y * fit,
+        )
+        .scale(fit * projected.perspective * facet.scaleX, fit * projected.perspective * facet.scaleY)
+        .translate(-facet.rawX, -facet.rawY);
+      facet.inverseTransform = matrix.inverse();
+
+      context.save();
+      context.transform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
+      context.fillStyle = staggeredColour(
+        facet,
+        palette,
+        paletteTransition,
+        paletteDelay,
+        paletteDuration,
+      );
+      context.filter = facet.inverted ? "invert(1)" : "none";
+      context.fill(facet.path);
+      context.restore();
+    }
+  }
+
+  function schedule() {
+    if (!destroyed && visible && !frame) frame = requestAnimationFrame(tick);
+  }
+
+  function cameraSettled() {
+    return (
+      springAtRest(camera.yaw, target.yaw) &&
+      springAtRest(camera.pitch, target.pitch) &&
+      springAtRest(camera.depth, target.depth) &&
+      springAtRest(camera.planeX, target.planeX, 0.01) &&
+      springAtRest(camera.planeY, target.planeY, 0.01)
+    );
+  }
+
+  function tick(now) {
+    frame = 0;
+    const delta = Math.min(0.032, Math.max(0.001, (now - previous) / 1000));
+    previous = now;
+    elapsed += delta;
+    springStep(camera.yaw, target.yaw, delta, options.cameraFrequency ?? 7.2);
+    springStep(camera.pitch, target.pitch, delta, options.cameraFrequency ?? 7.2);
+    springStep(camera.depth, target.depth, delta, options.depthFrequency ?? 6.2);
+    springStep(
+      camera.planeX,
+      target.planeX,
+      delta,
+      options.planeFrequency ?? 5.4,
+      options.planeDamping ?? 0.92,
+    );
+    springStep(
+      camera.planeY,
+      target.planeY,
+      delta,
+      options.planeFrequency ?? 5.4,
+      options.planeDamping ?? 0.92,
+    );
+    if (paletteChanging) {
+      paletteTransition.elapsed += delta;
+      if (paletteTransition.elapsed >= paletteTotal) {
+        paletteTransition.elapsed = paletteTotal;
+        paletteTransition.from = paletteTransition.to;
+        paletteChanging = false;
+      }
+    }
+    draw();
+    if (!cameraSettled() || paletteChanging) schedule();
+  }
+
+  function resize() {
+    const bounds = host.getBoundingClientRect();
+    width = Math.max(1, bounds.width);
+    height = Math.max(1, bounds.height);
+    dpr = Math.min(window.devicePixelRatio || 1, options.dprCap || 1.25);
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    draw();
+    host.classList.add("is-canvas-ready");
+  }
+
+  function signal(active) {
+    host.dispatchEvent(
+      new CustomEvent("favicon-canvas-interaction", {
+        bubbles: true,
+        detail: { active },
+      }),
+    );
+  }
+
+  function enter() {
+    signal(true);
+  }
+
+  function move(event) {
+    if (event.isPrimary === false) return;
+    const bounds = host.getBoundingClientRect();
+    const centerX = bounds.left + bounds.width / 2;
+    const centerY = bounds.top + bounds.height / 2;
+    const x = clamp((event.clientX - centerX) / Math.max(1, window.innerWidth * 0.5), -1, 1);
+    const y = clamp((event.clientY - centerY) / Math.max(1, window.innerHeight * 0.5), -1, 1);
+    const response = fovealResponse(x, y, options.fovealDeadZone ?? 0.08);
+    target.yaw = x * response.gain * (options.yawAmplitude ?? 0.07);
+    target.pitch = -y * response.gain * (options.pitchAmplitude ?? 0.052);
+    target.depth = response.gain;
+    target.planeX = x * response.gain * width * (options.planeTravelX ?? 0.042);
+    target.planeY = y * response.gain * height * (options.planeTravelY ?? 0.032);
+    schedule();
+  }
+
+  function leave() {
+    signal(false);
+  }
+
+  function resetCamera() {
+    target.yaw = 0;
+    target.pitch = 0;
+    target.depth = 0;
+    target.planeX = 0;
+    target.planeY = 0;
+    schedule();
+  }
+
+  function leaveViewport(event) {
+    if (!event.relatedTarget) resetCamera();
+  }
+
+  function hitFacet(event) {
+    const bounds = host.getBoundingClientRect();
+    const screen = new DOMPoint(event.clientX - bounds.left, event.clientY - bounds.top);
+    for (let index = drawOrder.length - 1; index >= 0; index -= 1) {
+      const facet = drawOrder[index].facet;
+      if (!facet.inverseTransform) continue;
+      const local = screen.matrixTransform(facet.inverseTransform);
+      context.save();
+      context.setTransform(1, 0, 0, 1, 0, 0);
+      const hit = context.isPointInPath(facet.path, local.x, local.y);
+      context.restore();
+      if (!hit) continue;
+      facet.inverted = !facet.inverted;
+      host.dispatchEvent(
+        new CustomEvent("favicon-facet-inversion", {
+          bubbles: true,
+          detail: { index: facet.index, inverted: facet.inverted },
+        }),
+      );
+      draw();
+      return facet;
+    }
+    return null;
+  }
+
+  function rotatePalette() {
+    if (palette.length < 2) return;
+    paletteTransition.from = paletteTransition.to;
+    paletteTransition.to = (paletteTransition.to + 1) % palette.length;
+    paletteTransition.elapsed = 0;
+    paletteChanging = true;
+    schedule();
+  }
+
+  function clearInversions() {
+    for (const facet of facets) facet.inverted = false;
+    draw();
+  }
+
+  const paletteTimer =
+    options.autoPalette === false || palette.length < 2
+      ? 0
+      : window.setInterval(rotatePalette, options.paletteInterval ?? 5200);
+  const resizeObserver = new ResizeObserver(resize);
+  const visibilityObserver = new IntersectionObserver(
+    ([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && (paletteChanging || !cameraSettled())) schedule();
+      else if (!visible) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      }
+    },
+    { threshold: 0.02 },
+  );
+  resizeObserver.observe(host);
+  visibilityObserver.observe(host);
+  host.addEventListener("pointerenter", enter, { passive: true });
+  host.addEventListener("pointerleave", leave, { passive: true });
+  host.addEventListener("click", hitFacet);
+  window.addEventListener("pointermove", move, { passive: true });
+  window.addEventListener("pointerdown", move, { passive: true });
+  window.addEventListener("pointerout", leaveViewport, { passive: true });
+  window.addEventListener("blur", resetCamera);
+  resize();
+  draw();
+
+  return {
+    rotatePalette,
+    clearInversions,
+    destroy() {
+      destroyed = true;
+      cancelAnimationFrame(frame);
+      if (paletteTimer) window.clearInterval(paletteTimer);
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
+      host.removeEventListener("pointerenter", enter);
+      host.removeEventListener("pointerleave", leave);
+      host.removeEventListener("click", hitFacet);
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerdown", move);
+      window.removeEventListener("pointerout", leaveViewport);
+      window.removeEventListener("blur", resetCamera);
+      signal(false);
+      canvas.remove();
+      host.classList.remove("is-canvas-ready");
+    },
+  };
+}

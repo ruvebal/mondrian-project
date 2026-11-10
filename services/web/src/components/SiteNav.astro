@@ -12,10 +12,12 @@ const works = await getCollection("works");
 
 const links = [
   { href: "/", id: "home", label: "Home" },
+  { href: "/assignments/", id: "assignments", label: "Assignments" },
   { href: "/gallery/", id: "gallery", label: "Gallery" },
   { href: "/about/", id: "about", label: "About" },
   { href: "/about-us/", id: "about-us", label: "About us" },
   { href: "/method/", id: "method", label: "Method" },
+  { href: "/design/tokens/", id: "tokens", label: "Tokens" },
   { href: "/contribute/", id: "contribute", label: "Contribute" },
 ];
 
@@ -41,10 +43,23 @@ const firstWork = works[0]?.data?.id;
       {
         firstWork && (
           <li>
-            <a href={withBase(`/create/${firstWork}/`, base)}>Create (soon)</a>
+            <a
+              href={withBase(`/create/${firstWork}/`, base)}
+              aria-current={current === "create" ? "page" : undefined}
+            >
+              Create
+            </a>
           </li>
         )
       }
+      <li>
+        <a
+          href={withBase("/kiosk/", base)}
+          aria-current={current === "kiosk" ? "page" : undefined}
+        >
+          Kiosk
+        </a>
+      </li>
     </ul>
   </nav>
 </header>

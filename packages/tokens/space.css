@@ -10,4 +10,15 @@
   --mp-touch-min: 44px;
   --mp-frame-handle: 12px;
   --mp-print-margin-default: 12mm;
+
+  --nx-space-1: var(--mp-space-1);
+  --nx-space-2: var(--mp-space-2);
+  --nx-space-3: var(--mp-space-3);
+  --nx-space-4: var(--mp-space-4);
+  --nx-space-5: var(--mp-space-5);
+  --nx-space-6: var(--mp-space-6);
+  --nx-space-7: var(--mp-space-7);
+  --nx-touch-min: var(--mp-touch-min);
+  --nx-frame-handle: var(--mp-frame-handle);
+  --nx-print-margin-default: var(--mp-print-margin-default);
 }

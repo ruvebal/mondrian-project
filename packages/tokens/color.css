@@ -1,6 +1,12 @@
 /**
- * Neoplastic-facing UI chrome — not painting fills.
- * Painting roles (red/yellow/blue/black/white) come from work JSON + relative HSL (D-07).
+ * Neoplastic-facing UI chrome — not painting fills (D-07, D-34).
+ * Painting roles come from work JSON + relative HSL.
+ * All product CSS must consume these tokens (or --nx-* aliases); no raw hex in pages.
+ *
+ * Doctrine (Effort Moderne 1920 · Ahmes coat le_neoplasticisme_mondrian_1920_01f3300f):
+ * - plans rectangulaires en couleur · rapports, not natural appearance (page_index=7)
+ * - trois couleurs fondamentales: rouge, jaune, bleu (page_index=15 · FIRST-SOURCES §6.4)
+ * - black/white = armature; never hue-rotate (pitch §7)
  */
 :root {
   --mp-color-canvas: #f4f2ed;
@@ -10,15 +16,19 @@
   --mp-color-focus: #1a5cff;
   --mp-color-danger: #b00020;
   --mp-color-ok: #0b6e4f;
+  /* Study paper / print silhouette (chrome, not a painting fill) */
+  --mp-color-paper: #ffffff;
+  /* Theme-color meta / PWA chrome */
+  --mp-color-theme: #121212;
 
-  /* Role tokens for chrome chips (map to work roles in the editor) */
-  --mp-role-red: hsl(0 85% 45%);
-  --mp-role-yellow: hsl(50 95% 50%);
-  --mp-role-blue: hsl(220 80% 45%);
-  --mp-role-black: hsl(0 0% 8%);
-  --mp-role-white: hsl(0 0% 98%);
+  /* Teaching / legend chips — hex mirrors brand/mark.svg (D-35) */
+  --mp-role-red: #d41111;
+  --mp-role-yellow: #f9d006;
+  --mp-role-blue: #1754cf;
+  --mp-role-black: #141414;
+  --mp-role-white: #fafafa;
 
-  /* D-33 Neoplastix aliases — prefer --nx-* in new CSS; --mp-* kept this term */
+  /* D-33 Neoplastix aliases — prefer --nx-* in new CSS */
   --nx-color-canvas: var(--mp-color-canvas);
   --nx-color-ink: var(--mp-color-ink);
   --nx-color-muted: var(--mp-color-muted);
@@ -26,6 +36,8 @@
   --nx-color-focus: var(--mp-color-focus);
   --nx-color-danger: var(--mp-color-danger);
   --nx-color-ok: var(--mp-color-ok);
+  --nx-color-paper: var(--mp-color-paper);
+  --nx-color-theme: var(--mp-color-theme);
   --nx-role-red: var(--mp-role-red);
   --nx-role-yellow: var(--mp-role-yellow);
   --nx-role-blue: var(--mp-role-blue);
@@ -38,5 +50,7 @@
     --mp-color-canvas: #161616;
     --mp-color-ink: #f2f2f2;
     --mp-color-muted: #a0a0a0;
+    --mp-color-paper: #1c1c1c;
+    --mp-color-theme: #161616;
   }
 }

@@ -1,0 +1,32 @@
+---
+interface Props {
+  seat?: number;
+  handle?: string;
+  title?: string;
+}
+
+const { seat, handle, title = "Student scaffold" } = Astro.props;
+---
+<aside class="scaffold-banner" role="note">
+  <p class="scaffold-banner__eyebrow">{title}</p>
+  <p>
+    {
+      seat != null ? (
+        <>
+          <strong>Seat {seat}</strong>
+          {handle && (
+            <>
+              {" "}
+              · <code>{handle}</code>
+            </>
+          )}
+          — replace this stub with your deliverable. Keep tokens (
+          <code>--nx-*</code>
+          ); do not fork palettes.
+        </>
+      ) : (
+        <>Browse the structure today; seats fill pages in Wave A–C.</>
+      )
+    }
+  </p>
+</aside>
