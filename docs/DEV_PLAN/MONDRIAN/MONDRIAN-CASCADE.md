@@ -80,12 +80,15 @@ Each row is an ADR in one line. M0 recorded each as `ratified` or `rejected` wit
 | **D-33 Neoplastix marque** | Visitor product = **Neoplastix** (canonical `https://neoplastix.crea-comm.net`; live = github.io until cutover). Programme/repo remain **Mondrian Project** / `ruvebal/mondrian-project` this AY. Athanor slug `mondrian-project` unchanged. Vanity `.io`/`.art` deferred. | Owner §9 locks 9 Nov 2026; D4 amended same day. | DNS/host cutover or `@neoplastix` scope wait on human / Wave A. |
 | **D-34 Style tokens** | Barrel `packages/tokens/` (+ `form.css`); type roles Architype Van Doesburg / Futura / Neue Haas Grotesk / Univers; chrome `--nx-radius-chrome: 0`; painting fills stay D-07. Seat 7 owns preview. | Typography report + 1920 imprint grounding (FIRST-SOURCES §6.3–6.4). | Foundry license before claiming Architype webfont live. |
 | **D-35 Favicon + Canvas 2.5D** | Canonical `brand/mark.svg`; deterministic favicon family; `@mondrian/mark-canvas` (parse SVG rects); landing field + foveal mark; `setCameraPaused` coordination. | canvas-25d-content-hero skill · token palette. | Tune amplitudes only; do not redraw mark geometry. |
+| **D-36 Locators, origin, edge** | Owned origin only (`https://neoplastix.crea-comm.net`) in printed/copied/canonical URLs; path = work, query = Recipe, fragment = position; recipe keys/ids **append-only**, unknown ignored, invalid clamped + announced, absent `v` = 1; locale never in printed paths; always-slash; edge honesty on Pages; [`LOCATORS.md`](LOCATORS.md) registry walked by tests and live probes. | TTOD Phase AA lessons re-probed here 10 Nov 2026: **H1 P0 half cutover** (domain live, `BASE` not flipped → CSS/nav 404), H2–H11. | Owned shortener domain, or a Phase 2 breaking recipe → `v=2` with a v1 reader. |
 
 **Decision status (27 Oct 2026 — owner amend):** D-32 **`adopted`**. Evidence: [`DECISIONS/D32-2026-10-27-SVG-STUDY-NOT-PHOTO.md`](DECISIONS/D32-2026-10-27-SVG-STUDY-NOT-PHOTO.md). Product repo already exists (`ruvebal/mondrian-project`); keep cascade docs in sync there.
 
 **Decision status (9 Nov 2026 — owner):** D-33 **`adopted`**. Evidence: [`DECISIONS/D33-2026-11-09-NEOPLASTIX-MARQUE.md`](DECISIONS/D33-2026-11-09-NEOPLASTIX-MARQUE.md).
 
 **Decision status (10 Nov 2026 — owner):** D-34 **`adopted`**. Evidence: [`DECISIONS/D34-2026-11-10-STYLE-TOKEN-TYPOGRAPHY.md`](DECISIONS/D34-2026-11-10-STYLE-TOKEN-TYPOGRAPHY.md) · [`../../style/TOKEN-SYSTEM.md`](../../style/TOKEN-SYSTEM.md).
+
+**Decision status (10 Nov 2026 — owner):** D-36 **`accepted`**. Evidence: [`DECISIONS/D36-2026-11-10-LOCATORS-ORIGIN-EDGE.md`](DECISIONS/D36-2026-11-10-LOCATORS-ORIGIN-EDGE.md). H1 (deploy `SITE`/`BASE` flip) is an ops action independent of adopting the rest.
 
 **Decision status (10 Nov 2026 — owner):** D-35 **`adopted`**. Evidence: [`DECISIONS/D35-2026-11-10-FAVICON-CANVAS-25D.md`](DECISIONS/D35-2026-11-10-FAVICON-CANVAS-25D.md).
 
@@ -172,7 +175,9 @@ The implementer must not self-certify DONE.
   the frame.
 - Palette inversion is explicit and reversible; never browser `filter: invert()`.
 - A frame cannot leave its printable area; print accuracy is claimed only after calibration.
-- Every href/src goes through Astro's base-aware helpers; the Pages URL, not localhost, is the acceptance surface.
+- Every href/src goes through Astro's base-aware helpers; the **canonical origin** (`PUBLIC_CANONICAL_ORIGIN`, D-36), not localhost or github.io, is the acceptance surface. CI also builds under a dummy non-root base so a root deploy cannot hide a missing helper.
+- Printed and copied URLs name only the owned domain. Recipe keys and enumerated ids are append-only; an old recipe opens (clamped + announced) and never blanks the stage. Language never enters `/create/…` (D-36, [`LOCATORS.md`](LOCATORS.md)).
+- Live claims come from a probe of the LOCATORS registry dated in the report, not from a document's earlier status line.
 - No photographs or scans of paintings committed or hotlinked.
 - Public site never depends on the LAN API. Astro must not execute Python.
 - AI Review Logs distinguish human checks from assistant-run checks; assistants

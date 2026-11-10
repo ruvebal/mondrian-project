@@ -12,14 +12,15 @@ if (!existsSync(dist)) {
   process.exit(1);
 }
 const html = readFileSync(dist, "utf8");
-if (html.includes("/mondrian-projectfavicon.svg")) {
+// Base-aware (D-36): "/" in production, "/__base-check__" in CI, anything in a fork.
+const base = (process.env.BASE || "/").replace(/\/$/, "");
+if (base && html.includes(`${base}favicon.svg`)) {
   console.error("assert-favicon-base: FAIL glued favicon path (missing slash after base)");
   process.exit(1);
 }
-if (!html.includes('href="/mondrian-project/favicon.svg"')) {
-  console.error(
-    "assert-favicon-base: FAIL expected href=\"/mondrian-project/favicon.svg\" in dist",
-  );
+const expected = `href="${base}/favicon.svg"`;
+if (!html.includes(expected)) {
+  console.error(`assert-favicon-base: FAIL expected ${expected} in dist`);
   process.exit(1);
 }
 console.log("assert-favicon-base: OK");

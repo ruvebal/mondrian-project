@@ -116,6 +116,12 @@ Implement PHASE-M6 per docs/DEV_PLAN/MONDRIAN/PHASE-M6.md.
 - Live URL: after hue, invert, variation, preset, and corner-drag end, the
   address-bar query deep-equals in-memory Recipe without a save step; reload
   restores every field; query stays under 2 KB; no `svg=` / work-JSON blob.
+- Recipe tolerance (D-36, [`LOCATORS.md`](LOCATORS.md) key table): every key's *missing* and *invalid*
+  row has a test; unknown keys are ignored and dropped on re-serialise; invalid values clamp and the live
+  region announces the adjustment; no input blanks the stage. A golden file of recipe URLs written at M6
+  VERIFYING must parse to the same state in every later release (append-only keys/ids).
+- Copy link / QR origin = `PUBLIC_CANONICAL_ORIGIN` (`https://neoplastix.crea-comm.net`); a test fails if
+  `github.io`, `localhost` or a LAN IP appears in a generated share URL.
 - All interactive targets ≥ 44×44 CSS px (Playwright bounding-box sweep).
 - axe 0 critical/serious on `/create/<slug>/`; keyboard-only and preset-only
   users can complete the journey without dragging.

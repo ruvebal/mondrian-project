@@ -8,7 +8,8 @@ Amends D-16 / D-17 / D-26 and MVP-PRODUCT-SPEC §§2–3, 7–9.
 
 **Status:** adopted 27 October 2026 (product-owner clarification, pre-M1).
 **Product contract:** [`../MVP-PRODUCT-SPEC.md`](../MVP-PRODUCT-SPEC.md) amended in place.
-**Depends on:** D-16 (surface / frame / recipe), D-17 (export/print), D-26 (no SVG-in-QR).
+**Depends on:** D-16 (surface / frame / recipe), D-17 (export/print), D-26 (no SVG-in-QR).  
+**Amended by D-36 (accepted 10 Nov 2026):** the canonical origin is `https://neoplastix.crea-comm.net` (D-33), not the github.io example in §4.4. Recipe evolution is append-only, with unknown keys ignored and invalid values clamped; absent `v` = 1. See [`D36`](D36-2026-11-10-LOCATORS-ORIGIN-EDGE.md) · registry [`../LOCATORS.md`](../LOCATORS.md).
 
 ---
 

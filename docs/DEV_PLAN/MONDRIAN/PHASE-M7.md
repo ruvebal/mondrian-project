@@ -51,7 +51,8 @@ Implement PHASE-M7 per docs/DEV_PLAN/MONDRIAN/PHASE-M7.md.
    also honour a `?profile=kiosk` query for development, documented as dev-only.
 2. Manifest + icons from the matrix (render the reference work to PNG at build
    with a tiny script; no photos). Generate manifest URLs with Astro's base and
-   assert `start_url=/mondrian-project/kiosk/` in the Pages build.
+   assert `start_url=/kiosk/` and `"id": "/kiosk/"` under production `BASE=/` (D-33 D5, D-36 H9; the old
+   `/mondrian-project/kiosk/` assertion is superseded). The manifest `id` never changes after the first device install.
 3. Service worker: precache list generated post-build; versioned cache name from the build hash; cleanup on
    activate; never cache cross-origin.
 4. kiosk.js: wake lock (try/catch, re-request on visibilitychange), idle reset

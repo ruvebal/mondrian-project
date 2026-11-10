@@ -61,6 +61,15 @@ Do **not** add a `CNAME` file or change deploy `SITE`/`BASE` until DNS is confir
 - Rewriting graded student seat prose
 - TTOD product identity (out of scope)
 
+## Live state (probed 10 Nov 2026 — see D-36 H1)
+
+The cutover is **half done**. The Pages custom domain is set (`cname: neoplastix.crea-comm.net`, cert approved,
+HTTPS enforced) and github.io 301s to it, but the deploy still builds `SITE=https://ruvebal.github.io`
+`BASE=/mondrian-project`. On the canonical domain the stylesheet, brand mark, favicon and every nav link 404.
+DNS is therefore live. Lock D5 (`BASE=/`) is now due: flip `SITE`/`BASE` in `deploy-pages.yml` and re-probe
+[`../LOCATORS.md`](../LOCATORS.md). With `build_type: workflow`, no `CNAME` file is needed (the domain lives in the
+Pages setting).
+
 ## Fallback
 
 Until cutover, keep serving `https://ruvebal.github.io/mondrian-project/` with Neoplastix chrome and document `https://neoplastix.crea-comm.net` as the medium-term canonical name.

@@ -50,6 +50,7 @@ Full anchor + expansion: [`grounding/FLAG-QUOTE-1920.md`](grounding/FLAG-QUOTE-1
 | Neoplastix marque | [`DECISIONS/D33-2026-11-09-NEOPLASTIX-MARQUE.md`](DECISIONS/D33-2026-11-09-NEOPLASTIX-MARQUE.md) | Visitor product = Neoplastix; programme/repo stay Mondrian Project this AY; Athanor slug unchanged. |
 | Style tokens | [`DECISIONS/D34-2026-11-10-STYLE-TOKEN-TYPOGRAPHY.md`](DECISIONS/D34-2026-11-10-STYLE-TOKEN-TYPOGRAPHY.md) · [`../../style/TOKEN-SYSTEM.md`](../../style/TOKEN-SYSTEM.md) · [`../../style/De_Stijl_Typography_Report.md`](../../style/De_Stijl_Typography_Report.md) · [`../../style/OPEN-TYPE-ALTERNATIVES.md`](../../style/OPEN-TYPE-ALTERNATIVES.md) | Barrel `packages/tokens/`; Van Doesburg / Futura / Neue Haas / Univers; OFL classroom stacks; form radius 0; Seat 7 preview. |
 | Favicon + Canvas 2.5D | [`DECISIONS/D35-2026-11-10-FAVICON-CANVAS-25D.md`](DECISIONS/D35-2026-11-10-FAVICON-CANVAS-25D.md) | Canonical `brand/mark.svg`; favicon family; `@mondrian/mark-canvas`; landing hero field + foveal mark. |
+| Locators, origin, edge | [`DECISIONS/D36-2026-11-10-LOCATORS-ORIGIN-EDGE.md`](DECISIONS/D36-2026-11-10-LOCATORS-ORIGIN-EDGE.md) · [`LOCATORS.md`](LOCATORS.md) | **Accepted 10 Nov 2026.** Lessons from TTOD Phase AA, re-probed here: owned origin only on stickers/QR, append-only recipe, locale-neutral printed paths, edge honesty on Pages, registry walked by tests. **H1 P0:** live domain half cut over (CSS/nav 404). |
 | Cohort seats | [`TEAM-ASSIGNMENTS.md`](TEAM-ASSIGNMENTS.md) · [`STUDENT-ASSIGNMENT-LIST.md`](STUDENT-ASSIGNMENT-LIST.md) · [`ISSUE-SEEDS.md`](ISSUE-SEEDS.md) | Seats 1–7; waves; paste-ready issue titles. |
 | Technical director | [`MONDRIAN-CASCADE.md`](MONDRIAN-CASCADE.md) | D-01…D-32, ordered programme with falsifiable gates, master paste, hard constraints, layer map, closing protocol, resume rule, amendments to the pitch, repository layout. |
 | Private correspondence | `_private/` (gitignored; forge only) | Student preflight and department/ECSIT emails. Only status/dates enter tracked reports; addresses, replies and signed material remain private. |
@@ -115,6 +116,7 @@ Closing: each phase → VERIFYING → `PHASE-Mn-COLD-REVIEW.md` → amend if nee
 | Product branch | `main` @ `620f00a` (PR #1 M1 close) | `git log -1`, 27 Oct 2026 |
 | Product remote | `git@github.com:ruvebal/mondrian-project.git` | `git remote -v` |
 | Pages home / contribute | **200** / **200** | `curl -sI` https://ruvebal.github.io/mondrian-project/{,/contribute/} |
+| **Re-probe 10 Nov 2026** | github.io **301 →** `neoplastix.crea-comm.net` (custom domain set, HTTPS enforced); domain serves HTML but `/mondrian-project/_astro/*.css`, brand, favicon, nav → **404** (`BASE` not flipped) | D-36 H1 · `gh api …/pages` |
 | Pages wrong path | **404** | `curl` `/this-path-does-not-exist` |
 | Favicon (D-base) | **200** at `/mondrian-project/favicon.svg` (glued path 404) | live curl after PR #1 deploy |
 | Svelte probe URL | `/probe/svelte/` (noindex; amend from spec `/_probe/`) | live 200; dist greps |

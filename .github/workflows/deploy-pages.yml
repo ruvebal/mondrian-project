@@ -1,4 +1,10 @@
 name: Deploy Pages
+# Canonical origin (D-33 D5, D-36 rule 1). One place only: a future brand domain is a repo
+# variable change (Settings → Variables → SITE_ORIGIN / SITE_BASE) + the Pages custom domain.
+# Step-level env silently overrides this block: only the base-portability check below may do it.
+env:
+  SITE: ${{ vars.SITE_ORIGIN || 'https://neoplastix.crea-comm.net' }}
+  BASE: ${{ vars.SITE_BASE || '/' }}
 
 on:
   push:
@@ -31,11 +37,15 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Build Astro site
+      # D-36: production is served at root, where a hardcoded "/gallery/" would work by accident.
+      # Build once under a dummy base so assert-dist-links catches any href that skips withBase.
+      - name: Base-portability check
         run: pnpm --filter @mondrian/web build
         env:
-          BASE: /mondrian-project
-          SITE: https://ruvebal.github.io
+          BASE: /__base-check__
+
+      - name: Build Astro site
+        run: pnpm --filter @mondrian/web build
 
       - uses: actions/upload-pages-artifact@v3
         with:

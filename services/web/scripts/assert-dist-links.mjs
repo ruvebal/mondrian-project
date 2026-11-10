@@ -4,7 +4,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const dist = join(import.meta.dirname, "../dist");
-const base = (process.env.BASE || "/mondrian-project").replace(/\/$/, "");
+const base = (process.env.BASE || "/").replace(/\/$/, "");
 const ok = new RegExp(
   `^(href|src)="(${base}/|https?:|mailto:|#|data:)`,
 );
