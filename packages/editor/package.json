@@ -4,13 +4,16 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.js",
-    "./Probe.svelte": "./src/Probe.svelte"
+    "./Probe.svelte": "./src/Probe.svelte",
+    "./Editor.svelte": "./src/Editor.svelte"
   },
   "scripts": {
     "test": "vitest run",
     "build": "node -e \"console.log('editor: consumed by Astro')\"",
     "lint": "node -e \"console.log('editor: lint deferred')\""
+  },
+  "dependencies": {
+    "@mondrian/matrix": "workspace:*"
   },
   "peerDependencies": {
     "svelte": "^5.43.6"

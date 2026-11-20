@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import ShellLayout from "../../layouts/ShellLayout.astro";
-import { withBase } from "../../lib/url";
+import Editor from "@mondrian/editor/Editor.svelte";
+import { swatchCssVars } from "../../lib/work-plan";
 import type { WorkDoc } from "../../lib/work-plan";
 
 export async function getStaticPaths() {
@@ -17,24 +18,9 @@ interface Props {
 }
 
 const { work } = Astro.props;
-const base = import.meta.env.BASE_URL;
-const q = Astro.url.search;
-const galleryHref = `${withBase(`/gallery/${work.id}/`, base)}${q}`;
 ---
 <ShellLayout title={`Create ${work.title} — Neoplastix`} current="home" noindex>
-  <article class="prose">
-    <h1>Editor arrives in M6</h1>
-    <p class="lede">
-      You selected <strong>{work.title}</strong> ({work.year}). The Svelte+SVG
-      island is intentionally not loaded on public shell routes.
-    </p>
-    <p>
-      This placeholder keeps your recipe query string so M6 can replace the page
-      without breaking bookmarks. Current query: <code>{q || "(none)"}</code>
-    </p>
-    <p class="btn-row">
-      <a class="btn btn--primary" href={galleryHref}>View SVG study</a>
-      <a class="btn btn--ghost" href={withBase("/gallery/", base)}>Gallery</a>
-    </p>
-  </article>
+  <div style={swatchCssVars(work)}>
+    <Editor work={work} client:load />
+  </div>
 </ShellLayout>
