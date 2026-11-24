@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import ShellLayout from "../../layouts/ShellLayout.astro";
+import Editor from "@mondrian/editor/Editor.svelte";
+import { swatchCssVars } from "../../lib/work-plan";
 import { withBase } from "../../lib/url";
 import type { WorkDoc } from "../../lib/work-plan";
 
@@ -22,19 +24,23 @@ const q = Astro.url.search;
 const galleryHref = `${withBase(`/gallery/${work.id}/`, base)}${q}`;
 ---
 <ShellLayout title={`Create ${work.title} — Neoplastix`} current="home" noindex>
-  <article class="prose">
-    <h1>Editor arrives in M6</h1>
-    <p class="lede">
-      You selected <strong>{work.title}</strong> ({work.year}). The Svelte+SVG
-      island is intentionally not loaded on public shell routes.
-    </p>
-    <p>
-      This placeholder keeps your recipe query string so M6 can replace the page
-      without breaking bookmarks. Current query: <code>{q || "(none)"}</code>
-    </p>
-    <p class="btn-row">
-      <a class="btn btn--primary" href={galleryHref}>View SVG study</a>
-      <a class="btn btn--ghost" href={withBase("/gallery/", base)}>Gallery</a>
-    </p>
-  </article>
+  <div style={swatchCssVars(work)}>
+    <Editor work={work} client:load />
+    <nav class="prose" aria-label="Editor navigation">
+      <p class="btn-row">
+        <a class="btn btn--primary" href={galleryHref} data-recipe-gallery-link>View SVG study</a>
+        <a class="btn btn--ghost" href={withBase("/gallery/", base)}>Gallery</a>
+      </p>
+    </nav>
+  </div>
 </ShellLayout>
+
+<script>
+  // Statically generated routes need the browser query string for recipe links.
+  const studyLink = document.querySelector<HTMLAnchorElement>("[data-recipe-gallery-link]");
+  if (studyLink) {
+    const studyUrl = new URL(studyLink.href);
+    studyUrl.search = window.location.search;
+    studyLink.href = studyUrl.href;
+  }
+</script>

@@ -22,6 +22,10 @@ importers:
         version: 3.25.76
 
   packages/editor:
+    dependencies:
+      '@mondrian/matrix':
+        specifier: workspace:*
+        version: link:../matrix
     devDependencies:
       '@testing-library/svelte':
         specifier: ^5.2.8
